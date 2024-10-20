@@ -1,5 +1,4 @@
 import os
-import sys
 import subprocess
 from tkinter import Tk, filedialog
 
@@ -7,8 +6,7 @@ def progress_bar(current_value, total_value, bar_length=30):
     percent = current_value / total_value
     filled_length = int(percent * bar_length)
     bar = '#' * filled_length + '-' * (bar_length - filled_length)
-    sys.stdout.write(f"\r[{bar}] {percent:.1%}")
-    sys.stdout.flush()
+    print(f"\r[{bar}] {percent:.1%}", end='', flush=True)
 
 
 def check_image_magick():
