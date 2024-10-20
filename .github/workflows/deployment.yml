@@ -53,7 +53,7 @@ jobs:
         pip install -r windows/requirements.txt
 
     - name: Build executable
-      run: pyinstaller --onefile --icon=assets/logo.ico --name=RockyConverter windows/RockyConverter.py
+      run: pyinstaller --onefile --icon=assets/logo.ico --name=RockyConverter.exe windows/RockyConverter.py
 
     - name: Copy in dist all necessary files
       run: |
