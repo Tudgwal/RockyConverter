@@ -12,8 +12,7 @@
 
 ### Windows
 
-1. Assurez-vous que ImageMagick est installé.
-2. Exécutez `installer.bat` pour installer les prérequis.
+1. Exécutez `installer.bat` pour installer les prérequis.
 3. Utilisez l'exécutable généré pour lancer l'application.
 
 ### Mac
