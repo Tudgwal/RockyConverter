@@ -65,11 +65,4 @@ for file in $jpg_files; do
 done
 
 echo -ne "\n"
-
 echo "All operations completed successfully!"
-
-
-
-pip install pyinstaller
-cd /c:/Users/Tudgwal/Desktop/compression\ rhps/
-pyinstaller --onefile script-tmp.py
