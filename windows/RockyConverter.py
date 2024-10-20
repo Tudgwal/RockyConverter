@@ -1,6 +1,15 @@
 import os
+import sys
 import subprocess
 from tkinter import Tk, filedialog
+
+def progress_bar(current_value, total_value, bar_length=30):
+    percent = current_value / total_value
+    filled_length = int(percent * bar_length)
+    bar = '#' * filled_length + '-' * (bar_length - filled_length)
+    sys.stdout.write(f"\r[{bar}] {percent:.1%}")
+    sys.stdout.flush()
+
 
 def check_image_magick():
     # Check if ImageMagick is installed
@@ -46,9 +55,10 @@ def main():
         subprocess.run(['magick', file, '-resize', '1920x1080', output_file])
 
         # Print progress
-        print(f"Processed: {os.path.basename(file)}")
+        progress_bar(jpg_files.index(file) + 1, len(jpg_files))
 
-    print("All operations completed successfully!")
+    # Print completion message that begin with a carriage return
+    print("\nAll images have been resized successfully.")
 
 
 # add main function
