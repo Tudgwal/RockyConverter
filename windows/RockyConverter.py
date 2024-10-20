@@ -5,10 +5,17 @@ from tkinter import Tk, filedialog
 def check_image_magick():
     # Check if ImageMagick is installed
     try:
-        subprocess.run(['magick', '-version'], stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
+        if os.name == 'nt':  # Windows
+            subprocess.run(['magick', '-version'], stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
+        else:  # Linux/Unix only for CI/CD
+            subprocess.run(['convert', '-version'], stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
     except FileNotFoundError:
         print("ImageMagick is not installed. Please install ImageMagick to use this script.")
         exit(1)
+
+    if os.name != 'nt':
+        print("This script is only supported on Windows.")
+        exit(0)
 
 
 def main(): 
