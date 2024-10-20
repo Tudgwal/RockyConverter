@@ -26,7 +26,9 @@ jobs:
       run: echo ::set-output name=tag::$(echo ${{ steps.get_tag.outputs.tag }} | awk -F. -v OFS=. '{$3++; print}')
 
     - name: push new tag
-      run: git tag ${{ steps.create_tag.outputs.tag }} && git push origin ${{ steps.create_tag.outputs.tag }}
+      run: |
+        git tag ${{ steps.create_tag.outputs.tag }}
+        git push --tags
       
 
   build:
