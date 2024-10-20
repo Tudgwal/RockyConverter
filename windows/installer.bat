@@ -20,21 +20,21 @@ if exist "%ALLUSERSPROFILE%\chocolatey\bin\choco.exe" (
     echo Chocolatey has been installed successfully!
     pause
 ) else (
-    echo Failed to install Chocolatey. Please try again manually.
+    echo Failed to install Chocolatey. Please try again.
     pause
     exit /b 1
 )
 
 REM Install imageMagick using Chocolatey
 echo Installing ImageMagick using Chocolatey...
-choco install ImageMagick -y > nul 2>&1
+choco install ImageMagick -y --force > nul 2>&1
 
 REM Check if ImageMagick was installed successfully
 if exist "C:\Program Files\ImageMagick-7.1.0-Q16" (
     echo ImageMagick has been installed successfully!
     pause
 ) else (
-    echo Failed to install ImageMagick. Please try again manually.
+    echo Failed to install ImageMagick. Please try again.
     pause
     exit /b 1
 )
