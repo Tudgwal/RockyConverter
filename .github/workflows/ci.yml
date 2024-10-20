@@ -1,6 +1,6 @@
 name: CI
 
-on: [push, pull_request]
+on: [pull_request]
 
 jobs:
   run-python:
@@ -17,6 +17,8 @@ jobs:
 
     - name: Install dependencies
       run: |
+        apt-get update
+        apt-get install imagemagick
         python -m pip install --upgrade pip
         pip install -r windows/requirements.txt
 
@@ -31,4 +33,7 @@ jobs:
       uses: actions/checkout@v4
 
     - name: Run bash script
-      run: bash linux/RockyConverter.sh
+      run: |
+        apt-get update
+        apt-get install imagemagick
+        bash linux/RockyConverter.sh ./
