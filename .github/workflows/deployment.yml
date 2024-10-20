@@ -84,7 +84,7 @@ jobs:
         GITHUB_TOKEN: ${{ secrets.PAT }}
       with:
         tag_name: ${{ needs.create-tag.outputs.tag }}
-        release_name: Release ${{ needs.create-tag.outputs.tag }}s
+        release_name: Release ${{ needs.create-tag.outputs.tag }}
         draft: false
         prerelease: false
 
