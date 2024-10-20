@@ -39,18 +39,32 @@ fi
 
 
 # Resize images to 1080p
+total_files=$(echo "$jpg_files" | wc -l)
+current_file=0
+
 for file in $jpg_files; do
     # Skip directories
     if [ -d "$file" ]; then
         continue
     fi
 
-    # reduce the size of the image and save it in the output directory
+    # Reduce the size of the image and save it in the output directory
     convert "$file" -resize 1920x1080 "$output_dir/$(basename "$file")"
     
-    # Print progress
-    echo "Processed: $(basename "$file")"
+    # Update progress
+    current_file=$((current_file + 1))
+    progress=$((current_file * 100 / total_files))
+    echo -ne "Progress: ["
+    for ((i=0; i<progress; i+=2)); do
+        echo -ne "#"
+    done
+    for ((i=progress; i<100; i+=2)); do
+        echo -ne " "
+    done
+    echo -ne "] $progress% ($current_file/$total_files)\r"
 done
+
+echo -ne "\n"
 
 echo "All operations completed successfully!"
 
