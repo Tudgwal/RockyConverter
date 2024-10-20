@@ -17,8 +17,8 @@ jobs:
 
     - name: Install dependencies
       run: |
-        apt-get update
-        apt-get install imagemagick
+        sudo apt update
+        sudo apt install imagemagick
         python -m pip install --upgrade pip
         pip install -r windows/requirements.txt
 
@@ -34,6 +34,6 @@ jobs:
 
     - name: Run bash script
       run: |
-        apt-get update
-        apt-get install imagemagick
+        sudo apt update
+        sudo apt install imagemagick
         bash linux/RockyConverter.sh ./
