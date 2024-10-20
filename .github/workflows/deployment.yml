@@ -36,7 +36,7 @@ jobs:
 
   build:
     needs: create-tag
-    runs-on: ubuntu-latest
+    runs-on: windows-latest
 
     steps:
     - name: Checkout code
@@ -55,10 +55,10 @@ jobs:
     - name: Build executable
       run: pyinstaller --onefile --icon=assets/logo.ico --name=RockyConverter.exe windows/RockyConverter.py
 
-    - name: Copy in dist all necessary files
+    - name: copy file to dist
       run: |
-        cp windows/installer.bat dist/
-        cp linux/RockyConverter.sh dist/
+        copy windows\installer.bat dist\installer.bat
+        copy linux\RockyConverter.sh dist\RockyConverter.sh
 
     - name: Upload artifact
       uses: actions/upload-artifact@v4

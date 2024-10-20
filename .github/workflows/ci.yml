@@ -3,6 +3,37 @@ name: CI
 on: [pull_request]
 
 jobs:
+  build:
+    runs-on: windows-latest
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+
+    - name: Set up Python
+      uses: actions/setup-python@v5
+      with:
+        python-version: '3.x'
+
+    - name: Install dependencies
+      run: |
+        python -m pip install --upgrade pip
+        pip install -r windows/requirements.txt
+
+    - name: Build executable
+      run: pyinstaller --onefile --icon=assets/logo.ico --name=RockyConverter.exe windows/RockyConverter.py
+
+    - name: copy file to dist
+      run: |
+        copy windows\installer.bat dist\installer.bat
+        copy linux\RockyConverter.sh dist\RockyConverter.sh
+
+    - name: Upload artifact
+      uses: actions/upload-artifact@v4
+      with:
+        name: executable
+        path: dist/
+
   run-python:
     runs-on: ubuntu-latest
 
