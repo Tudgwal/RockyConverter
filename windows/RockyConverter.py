@@ -33,14 +33,16 @@ def main():
     # Open a window to select the directory
     input_dir = filedialog.askdirectory(title="Select a directory")
 
-    # Find all .jpg files in the directory and subdirectories recursively
-    jpg_files = []
+    # Find all image files in the directory and subdirectories recursively
+    supported_extensions = ('.jpg', '.jpeg', '.png', '.bmp', '.tiff')
+    image_files = []
+
     for root, dirs, files in os.walk(input_dir):
         for file in files:
-            if file.lower().endswith('.jpg'):
-                jpg_files.append(os.path.join(root, file))
+            if file.lower().endswith(supported_extensions):
+                image_files.append(os.path.join(root, file))
 
-    print(f"Found {len(jpg_files)} .jpg files in the directory: {input_dir}")
+    print(f"Found {len(image_files)} image files in the directory: {input_dir}")
 
     # Set the output directory
     output_dir = f"{input_dir.rstrip('/')}_resized"
@@ -50,7 +52,7 @@ def main():
         os.makedirs(output_dir)
 
     # Resize images to 1080p using ImageMagick
-    for file in jpg_files:
+    for file in image_files:
         # Skip directories
         if os.path.isdir(file):
             continue
@@ -60,7 +62,7 @@ def main():
         subprocess.run(['magick', file, '-resize', '1920x1080', output_file])
 
         # Print progress
-        progress_bar(jpg_files.index(file) + 1, len(jpg_files))
+        progress_bar(image_files.index(file) + 1, len(image_files))
 
     # Print completion message that begin with a carriage return
     print("\nAll images have been resized successfully.")
