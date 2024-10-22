@@ -23,11 +23,11 @@ fi
 # Get the provided directory path
 input_dir=$1
 
-# Find all .jpg files in the directory and subdirectories recursively. it can be JPG, jpg, Jpg, etc.
-jpg_files=$(find "$input_dir" -type f -iname "*.jpg")
+# Find all image files in the directory and subdirectories recursively. It can be JPG, PNG, TIFF, etc.
+image_files=$(find "$input_dir" -type f \( -iname "*.jpg" -o -iname "*.jpeg" -o -iname "*.png" -o -iname "*.tiff" \))
 
 
-echo "Found $(echo "$jpg_files" | wc -l) .jpg files in the directory: $input_dir"
+echo "Found $(echo "$image_files" | wc -l) images in the directory: $input_dir"
 
 # set the output directory
 output_dir="$(echo "$input_dir" | sed 's:/*$::')_resized"
@@ -39,10 +39,10 @@ fi
 
 
 # Resize images to 1080p
-total_files=$(echo "$jpg_files" | wc -l)
+total_files=$(echo "$image_files" | wc -l)
 current_file=0
 
-for file in $jpg_files; do
+for file in $image_files; do
     # Skip directories
     if [ -d "$file" ]; then
         continue
