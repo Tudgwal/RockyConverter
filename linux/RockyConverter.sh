@@ -30,7 +30,7 @@ image_files=$(find "$input_dir" -type f \( -iname "*.jpg" -o -iname "*.jpeg" -o 
 echo "Found $(echo "$image_files" | wc -l) images in the directory: $input_dir"
 
 # set the output directory
-output_dir="$(echo "$input_dir" | sed 's:/*$::')_resized"
+output_dir="$input_dir/resized_images"
 
 # Create the output directory if it does not exist
 if [ ! -d "$output_dir" ]; then
