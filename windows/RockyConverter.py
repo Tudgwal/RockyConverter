@@ -45,7 +45,7 @@ def main():
     print(f"Found {len(image_files)} image files in the directory: {input_dir}")
 
     # Set the output directory
-    output_dir = f"{input_dir.rstrip('/')}_resized"
+    output_dir = os.path.join(input_dir, "resized_images")
 
     # Create the output directory if it does not exist
     if not os.path.exists(output_dir):
